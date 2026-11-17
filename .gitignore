@@ -1,1 +1,14 @@
-*.fasta
+# Generic patterns
+.DS_Store
+Thumbs.db
+# R artifacts
+.Rhistory
+.RData
+.Rproj.user/
+# Python artifacts
+__pycache__/
+*.py[cod]
+# Logs
+*.log
+# Data files that are large (optional)
+rawdata/*.csv
