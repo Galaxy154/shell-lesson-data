@@ -22,6 +22,34 @@ This repository contains data and example scripts used in the **Git, R, and Unix
 ├─ writing/                # Large text examples (novel, haiku)
 │   ├─ LittleWomen.txt
 │   └─ haiku.txt
+├─ analysis/               # Day‑4 R script and helper Bash script
+│   ├─ gapminder_analysis.R
+│   └─ run_analysis.sh
+├─ results/                # Generated plots (git‑ignored)
+├─ gapminder.html          # Interactive Gapminder visualisation (see below)
+├─ .gitignore              # Files Git should ignore
+└─ README.md               # This file
+```
+
+
+```
+/shell-lesson-data/
+├─ rawdata/                # Raw data files (e.g., gapminder dataset)
+│   └─ gapminder.csv       # Gapminder data downloaded for the tutorial
+├─ alkanes/                # Example PDB files and a Bash script
+│   ├─ methane.pdb
+│   ├─ ethane.pdb
+│   ├─ propane.pdb
+│   └─ script.sh
+├─ animals/                # Small CSV and text examples
+│   └─ animals.csv
+├─ creatures/              # Sample binary `.dat` files and a script
+│   ├─ basilisk.dat
+│   ├─ minotaur.dat
+│   └─ unicorn.dat
+├─ writing/                # Large text examples (novel, haiku)
+│   ├─ LittleWomen.txt
+│   └─ haiku.txt
 ├─ .gitignore              # Files/folders to ignore in Git
 └─ README.md               # This file
 ```
