@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gapminder Life Expectancy Explorer</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 2rem;}
+    #chart {width: 100%; height: 600px;}
+    #country-select {margin-bottom: 1rem;}
+  </style>
+</head>
+<body>
+  <h1>Gapminder – Life Expectancy Over Time</h1>
+  <label for="country-select">Choose a country:</label>
+  <select id="country-select"></select>
+  <div id="chart"></div>
+
+  <script>
+    // Load CSV (relative to this HTML file)
+    d3.csv('rawdata/gapminder.csv').then(function(data) {
+      // Parse numeric fields
+      data.forEach(d => {
+        d.year = +d.year;
+        d.lifeExp = +d.lifeExp;
+        d.pop = +d.pop;
+        d.gdpPercap = +d.gdpPercap;
+      });
+
+      const countries = Array.from(new Set(data.map(d => d.country))).sort();
+      const select = d3.select('#country-select');
+      countries.forEach(c => {
+        select.append('option').attr('value', c).text(c);
+      });
+
+      function updateChart(selectedCountry) {
+        const filtered = data.filter(d => d.country === selectedCountry);
+        const trace = {
+          x: filtered.map(d => d.year),
+          y: filtered.map(d => d.lifeExp),
+          mode: 'lines+markers',
+          type: 'scatter',
+          marker: {color: 'steelblue'},
+          line: {shape: 'linear'}
+        };
+        const layout = {
+          title: `Life Expectancy in ${selectedCountry}`,
+          xaxis: {title: 'Year'},
+          yaxis: {title: 'Life Expectancy (years)'}
+        };
+        Plotly.newPlot('chart', [trace], layout);
+      }
+
+      // Initial plot
+      updateChart(countries[0]);
+
+      // Update on selection change
+      select.on('change', function() {
+        const country = this.value;
+        updateChart(country);
+      });
+    }).catch(function(error){
+      console.error('Error loading CSV:', error);
+      d3.select('#chart').text('Failed to load data.');
+    });
+  </script>
+</body>
+</html>
